@@ -1,3 +1,4 @@
+
 SELECT * FROM tracks
 WHERE duration = (SELECT MAX(duration) FROM tracks);
 
@@ -11,7 +12,7 @@ SELECT name AS n FROM Artists
 WHERE name NOT LIKE '% %';
 
 SELECT title FROM TRACKS
-WHERE title ILIKE '%my%' OR title ILIKE '%мой%';
+WHERE string_to_array(lower(title), ' ') && ARRAY ['my', 'мой'];
 
 SELECT 
     g.name,
@@ -34,7 +35,7 @@ WHERE artist_id NOT IN (
     FROM AlbumArtists aa
     JOIN Albums a ON aa.album_id  = a.album_id 
     WHERE a.release_year = 2020
-)
+);
 
 SELECT DISTINCT c.collection_name, c.release_year
 FROM Collections c
